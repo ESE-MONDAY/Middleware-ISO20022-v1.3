@@ -1,10 +1,10 @@
-# 🚀 Proofrails Setup Guide – Get Started in 5 Minutes
+# Proofrails Setup Guide – Get Started in 5 Minutes
 
 **Transform blockchain tips into banking-standard ISO 20022 receipts, anchored immutably on Flare.**
 
----
 
-## ⚡ What is Proofrails?
+
+##  What is Proofrails?
 
 Proofrails is an open-source ISO 20022 Payments Middleware that:
 - ✅ Converts blockchain tips into ISO 20022 XML (pain.001 format)
@@ -13,11 +13,11 @@ Proofrails is an open-source ISO 20022 Payments Middleware that:
 - ✅ Generates immutable receipts with audit trails
 - ✅ Provides REST API + Web UI + Embeddable widgets
 
-**Perfect for:** Capella integrations, fintech apps, compliance-first platforms.
+**Perfect for:**  fintech apps, compliance-first platforms.
 
----
 
-## 🎯 Option 1: Local Development (5 minutes)
+
+##  Option 1: Local Development (5 minutes)
 
 ### Prerequisites
 - Python 3.11+
@@ -47,9 +47,9 @@ docker compose up --build
 **Note:** If you skip the `.env` file, the API still works—receipts just won't anchor to Flare (status stays "pending").
 
 **That's it!** Open your browser:
-- 📊 **Dashboard**: http://127.0.0.1:8000/web/index.html
-- 📚 **API Docs**: http://127.0.0.1:8000/docs
-- 🧪 **Swagger**: http://127.0.0.1:8000/redoc
+-  **Dashboard**: http://127.0.0.1:8000/web/index.html
+-  **API Docs**: http://127.0.0.1:8000/docs
+-  **Swagger**: http://127.0.0.1:8000/redoc
 
 ### First Test
 
@@ -70,9 +70,9 @@ curl -X POST http://127.0.0.1:8000/v1/iso/record-tip \
 
 You'll get a `receipt_id` instantly. Status updates as the bundle anchors.
 
----
 
-## 🌐 Option 2: Deploy to Railway (10 minutes)
+
+##  Option 2: Deploy to Railway (10 minutes)
 
 ### Prerequisites
 - Railway account (free tier available)
@@ -110,14 +110,14 @@ You'll get a `receipt_id` instantly. Status updates as the bundle anchors.
    - Test: `curl https://your-domain/v1/health`
 
 **Railway gives you:**
-- ✅ Auto-scaling API
-- ✅ Persistent PostgreSQL
-- ✅ File storage for artifacts
-- ✅ Public HTTPS domain
+-  Auto-scaling API
+-  Persistent PostgreSQL
+-  File storage for artifacts
+-  Public HTTPS domain
 
----
 
-## 🔗 Integrate with Capella (or Your App)
+
+##  Integrate with Your App
 
 ### Step 1: Copy Integration Files
 
@@ -192,9 +192,9 @@ Use the REST API to build your own UI:
 - `GET /v1/iso/events/{id}` – live updates via SSE
 - `POST /v1/iso/verify` – verify bundle
 
----
 
-## 🔑 API Key Management
+
+##  API Key Management
 
 ### Public Dashboard
 Visit: `https://your-domain/web/index.html`
@@ -213,9 +213,9 @@ Visit: `https://your-domain/web/admin.html`
 - ✅ Manage all API keys (requires `ADMIN_TOKEN`)
 - ✅ Create keys for specific projects
 
----
 
-## 📋 Core API Endpoints
+
+##  Core API Endpoints
 
 | Endpoint | Method | Purpose |
 |----------|--------|---------|
@@ -229,9 +229,9 @@ Visit: `https://your-domain/web/admin.html`
 
 **Full API docs**: `https://your-domain/docs`
 
----
 
-## 🛠️ Troubleshooting
+
+##  Troubleshooting
 
 ### Anchoring not working?
 - ✅ Ensure `ANCHOR_PRIVATE_KEY` is funded on Coston2
@@ -251,7 +251,7 @@ Visit: `https://your-domain/web/admin.html`
 - ✅ Place `pain.001.001.09.xsd` in `schemas/` folder
 - ✅ Validation is optional; bundles still anchor without it
 
----
+
 
 ## 🚀 Next Steps
 
@@ -280,7 +280,7 @@ Visit: `https://your-domain/web/admin.html`
 
 ---
 
-## 📚 Resources
+##  Resources
 
 - **Full Documentation**: See `README.md`
 - **API Reference**: `API_Documentation.md`
@@ -289,27 +289,23 @@ Visit: `https://your-domain/web/admin.html`
 
 ---
 
-## ❓ Questions?
+##  Questions?
 
 - 🐛 Found a bug? Open an issue
 - 💬 Need help? Check the docs folder
 - 🤝 Want to contribute? PRs welcome!
 
----
+
 
 ## 📈 Key Features At a Glance
 
-✨ **Instant Receipts** – data available immediately  
-🔐 **Cryptographically Signed** – Ed25519 signatures  
-⛓️ **On-Chain Anchored** – immutable proof on Flare  
-📜 **ISO 20022 Compliant** – pain.001.001.09 XML  
-🔄 **Zero Polling** – Server-Sent Events for live updates  
-🧩 **Embeddable Widgets** – iframe-ready receipt display  
-🏢 **Multi-Project** – API keys scoped to projects  
-🌐 **REST API** – production-ready endpoints  
+ **Instant Receipts** – data available immediately  
+ **Cryptographically Signed** – Ed25519 signatures  
+ **On-Chain Anchored** – immutable proof on Flare  
+ **ISO 20022 Compliant** – pain.001.001.09 XML  
+ **Zero Polling** – Server-Sent Events for live updates  
+ **Embeddable Widgets** – iframe-ready receipt display  
+ **Multi-Project** – API keys scoped to projects  
+ **REST API** – production-ready endpoints  
 
----
 
-**Happy building! 🎉**
-
-*Transform your blockchain transactions into compliant financial records with Proofrails.*
