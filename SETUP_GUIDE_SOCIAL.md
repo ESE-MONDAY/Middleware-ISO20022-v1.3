@@ -230,8 +230,81 @@ Visit: `https://your-domain/web/admin.html`
 **Full API docs**: `https://your-domain/docs`
 
 
+<<<<<<< HEAD
 
 ##  Troubleshooting
+=======
+## 🧪 Using the API with Postman
+
+### Step 1: Create an API Key
+
+1. Open Postman and create a **POST** request
+2. URL: `https://your-domain/v1/public/api-keys`
+3. **Headers** tab:
+   - `Content-Type: application/json`
+4. **Body** tab → **raw** → **JSON**:
+   ```json
+   {
+     "name": "postman-key"
+   }
+   ```
+5. Click **Send** and copy the `api_key` value from the response (starts with `sk_`)
+
+### Step 2: Create a Receipt
+
+1. Create a new **POST** request
+2. URL: `https://your-domain/v1/iso/record-tip`
+3. **Headers** tab:
+   - `x-api-key: sk_<your-key-from-step-1>`
+   - `Content-Type: application/json`
+4. **Body** tab → **raw** → **JSON**:
+   ```json
+   {
+     "tip_tx_hash": "0xabc123def456",
+     "chain": "coston2",
+     "amount": "0.001",
+     "currency": "FLR",
+     "sender_wallet": "0x1234567890123456789012345678901234567890",
+     "receiver_wallet": "0x0987654321098765432109876543210987654321",
+     "reference": "demo:tip:1",
+     "callback_url": "https://your-app.com/callback"
+   }
+   ```
+5. Click **Send** — you get back `receipt_id` and `status: "pending"`
+
+### Step 3: Check Receipt Status
+
+1. Create a new **GET** request
+2. URL: `https://your-domain/v1/iso/receipts/<receipt_id>`
+3. **Headers** tab:
+   - `x-api-key: sk_<your-key>`
+4. Click **Send** — status will change to "anchored" once on-chain
+
+### Step 4: Verify Bundle
+
+1. Create a new **POST** request
+2. URL: `https://your-domain/v1/iso/verify`
+3. **Headers** tab:
+   - `x-api-key: sk_<your-key>`
+   - `Content-Type: application/json`
+4. **Body** tab → **raw** → **JSON** (use `bundle_url` from receipt):
+   ```json
+   {
+     "bundle_url": "https://your-domain/files/<receipt_id>/evidence.zip"
+   }
+   ```
+5. Click **Send** — `matches_onchain: true` means it's verified on Flare ✅
+
+### Save as Postman Collection
+
+For reusability, save these requests as a **Postman Collection**:
+1. File → Export → select all requests → save as `.json`
+2. Share with team or import into other workspaces
+
+---
+
+## 🛠️ Troubleshooting
+>>>>>>> 2e1cec5 (Setup Guide)
 
 ### Anchoring not working?
 - ✅ Ensure `ANCHOR_PRIVATE_KEY` is funded on Coston2
@@ -265,7 +338,6 @@ Visit: `https://your-domain/web/admin.html`
 
 2. **Deploy to Railway** (or any container platform)
    - Connect repo
-   - Add Postgres
    - Set env vars
    - Deploy
 
