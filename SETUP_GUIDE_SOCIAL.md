@@ -86,28 +86,26 @@ You'll get a `receipt_id` instantly. Status updates as the bundle anchors.
    - Build: Use Dockerfile (default)
    - Root directory: `Middleware-ISO-20022-payments`
 
-2. **Add PostgreSQL**
-   - Add Postgres add-on
-   - Copy connection string
 
-3. **Set Environment Variables**
+
+2. **Set Environment Variables**
    ```
    FLARE_RPC_URL=https://coston2-api.flare.network/ext/C/rpc
    ANCHOR_CONTRACT_ADDR=0x262b1C649CE016717c62b9403E719C4801974CeF
    ANCHOR_PRIVATE_KEY=0x<your_funded_coston2_key>
    ANCHOR_ABI_PATH=contracts/EvidenceAnchor.abi.json
-   DATABASE_URL=postgresql://<user>:<pass>@<host>:<port>/<db>
    ARTIFACTS_DIR=/data/artifacts
    PUBLIC_BASE_URL=https://<your-api-domain>
    ```
 
-4. **Add Volume**
-   - Create 1-5 GB volume
-   - Mount at `/data`
 
-5. **Deploy**
+3. **Deploy**
    - Railway generates public URL automatically
    - Test: `curl https://your-domain/v1/health`
+
+
+
+** Railway auto detects setup information from docker-compose.yml file**
 
 **Railway gives you:**
 -  Auto-scaling API
@@ -165,9 +163,9 @@ const verified = await mwVerify(status.bundle_url);
 console.log(verified.matches_onchain); // true = anchored on Flare ✅
 ```
 
----
 
-## 🎨 Display Receipts to Users
+
+##  Display Receipts to Users
 
 ### Option A: Embedded Widget
 
@@ -230,11 +228,7 @@ Visit: `https://your-domain/web/admin.html`
 **Full API docs**: `https://your-domain/docs`
 
 
-<<<<<<< HEAD
-
-##  Troubleshooting
-=======
-## 🧪 Using the API with Postman
+##  Using the API with Postman
 
 ### Step 1: Create an API Key
 
@@ -295,16 +289,9 @@ Visit: `https://your-domain/web/admin.html`
    ```
 5. Click **Send** — `matches_onchain: true` means it's verified on Flare ✅
 
-### Save as Postman Collection
 
-For reusability, save these requests as a **Postman Collection**:
-1. File → Export → select all requests → save as `.json`
-2. Share with team or import into other workspaces
 
----
-
-## 🛠️ Troubleshooting
->>>>>>> 2e1cec5 (Setup Guide)
+##  Troubleshooting
 
 ### Anchoring not working?
 - ✅ Ensure `ANCHOR_PRIVATE_KEY` is funded on Coston2
@@ -326,7 +313,7 @@ For reusability, save these requests as a **Postman Collection**:
 
 
 
-## 🚀 Next Steps
+##  Next Steps
 
 1. **Clone & Run Locally**
    ```bash
@@ -348,9 +335,7 @@ For reusability, save these requests as a **Postman Collection**:
 
 4. **Verify Receipts**
    - Share receipt links with users
-   - They can verify authenticity on Flare ✅
-
----
+   - They can verify authenticity on Flare 
 
 ##  Resources
 
@@ -363,13 +348,13 @@ For reusability, save these requests as a **Postman Collection**:
 
 ##  Questions?
 
-- 🐛 Found a bug? Open an issue
-- 💬 Need help? Check the docs folder
-- 🤝 Want to contribute? PRs welcome!
+-  Found a bug? Open an issue
+-  Need help? Check the docs folder
+-  Want to contribute? PRs welcome!
 
 
 
-## 📈 Key Features At a Glance
+##  Key Features At a Glance
 
  **Instant Receipts** – data available immediately  
  **Cryptographically Signed** – Ed25519 signatures  
