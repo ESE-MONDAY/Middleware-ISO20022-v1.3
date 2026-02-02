@@ -18,6 +18,8 @@ This document shows how the core middleware processes a request to anchor eviden
 
 ## Why the Database is needed 
 
+The database stores the bundle hash and artifact paths (columns: `bundle_hash`, `xml_path`, `bundle_path`); the actual files are kept on disk under `artifacts/{receipt_id}/` and served via `/files`.
+
 - **Durability & Audit**: Persist receipt records, bundle_hash, flare_txid, timestamps and status for audit and reporting.
 - **Idempotency & Deduplication**: Ensure the same on-chain tip is not recorded twice (dedupe by chain + tip_tx_hash).
 - **Search & Reporting**: Produce statements (camt052/camt053) and list receipts per project or timeframe.
