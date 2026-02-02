@@ -1,10 +1,10 @@
-# Architecture Overview ✅
+# Architecture Overview 
 
 This document shows how the core middleware processes a request to anchor evidence on the Flare network, why a database is required, and how artifacts / receipts are stored and verified.
 
----
 
-## High-level flow 🔧
+
+## High-level flow 
 
 1. Client POSTs a tip: `POST /v1/iso/record-tip` (includes chain, tip_tx_hash, amount, wallets, optional callback)
 2. API validates API key and writes a **Receipt** (status: `pending`) into the **Database** (SQLAlchemy: `app/db.py`, models in `app/models.py`).
@@ -14,9 +14,9 @@ This document shows how the core middleware processes a request to anchor eviden
 6. Artifacts (XML, bundle.zip, generated ISO messages) are written to the `artifacts/{receipt_id}/` directory and served statically by the API.
 7. SSE (Server-Sent Events) updates are published for live UI updates and an optional callback to an external system (e.g., Capella) is fired.
 
----
 
-## Why the Database is needed 💾
+
+## Why the Database is needed 
 
 - **Durability & Audit**: Persist receipt records, bundle_hash, flare_txid, timestamps and status for audit and reporting.
 - **Idempotency & Deduplication**: Ensure the same on-chain tip is not recorded twice (dedupe by chain + tip_tx_hash).
@@ -26,9 +26,9 @@ This document shows how the core middleware processes a request to anchor eviden
 
 Note: The app supports `DATABASE_URL` (Postgres for production) and falls back to SQLite for local dev (`app/db.py`).
 
----
 
-## Components & Roles 🧩
+
+## Components & Roles 
 
 - **FastAPI API (`app/main.py`)** – receives requests, writes receipt row, schedules background work.
 - **ISO generator (`app/iso.py`)** – creates `pain.001` and other ISO messages.
@@ -39,7 +39,7 @@ Note: The app supports `DATABASE_URL` (Postgres for production) and falls back t
 - **SSE hub (`app/sse.py`)** – streams real-time receipt updates to clients.
 - **Flare Network** – RPC endpoint defined by `FLARE_RPC_URL`; evidence anchor contract address `ANCHOR_CONTRACT_ADDR`.
 
----
+
 
 ## Visual Diagrams
 
@@ -92,25 +92,8 @@ sequenceDiagram
     Note over DB,A: Verifier (/v1/iso/verify) may query AnchorSvc
 ```
 
-> If Mermaid is not available, view the ASCII fallback below.
 
-### ASCII fallback
-
-Client -> API (/v1/iso/record-tip)
-API -> DB : insert receipt (pending)
-API -> Worker (background)
-Worker -> ISO : generate XML
-Worker -> Bundle : create bundle (compute hash)
-Worker -> Anchor : call anchorEvidence(bundleHash)
-Anchor -> Flare RPC : send tx
-Flare -> Anchor : emit EvidenceAnchored event
-Anchor -> DB : update receipt with txid/status
-Worker -> Artifacts : write files
-Worker -> SSE/Callback : notify clients
-
----
-
-## Operational notes & env variables ⚙️
+## Operational notes & env variables 
 
 - FLARE_RPC_URL — RPC node (Coston2 testnet or mainnet)
 - ANCHOR_CONTRACT_ADDR — EvidenceAnchor contract address
@@ -119,9 +102,9 @@ Worker -> SSE/Callback : notify clients
 - ARTIFACTS_DIR — where files are persisted and served from
 - VERIFY_AUTO_ANCHOR — if enabled, /verify may auto-anchor missing bundles
 
----
 
-## Quick reference to code locations 📁
+
+## Quick reference to code locations 
 
 - API & flow: `app/main.py`
 - Anchoring: `app/anchor.py`, `app/anchor_node.py`
@@ -130,6 +113,6 @@ Worker -> SSE/Callback : notify clients
 - ISO messages: `app/iso.py` and `app/iso_messages/`
 - Artifacts directory: `artifacts/`
 
----
 
-If you want, I can add a PNG export of the diagram or expand the diagram to show failure modes (retries, provider throttling, nonce handling) and monitoring metrics. 💡
+
+
