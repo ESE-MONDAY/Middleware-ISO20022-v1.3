@@ -56,8 +56,8 @@ flowchart TD
   AnchorSvc -->|tx -> RPC| Flare[Flare Network]
   Flare -->|event| AnchorSvc
   AnchorSvc --> DB
-  Worker --> Artifacts[Artifacts dir (files)]
-  Worker -->|SSE / Callback| Clientsvc[UI / Capella callback]
+  Worker --> Artifacts["Artifacts dir (files)"]
+  Worker -->|SSE / Callback| Clientsvc["UI / Capella callback"]
 
   classDef infra fill:#f8f9fa,stroke:#ddd;
   class DB,Flare,Artifacts infra;
