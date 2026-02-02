@@ -52,7 +52,7 @@ flowchart TD
   API -->|Background task| Worker[Background Task]
   Worker --> ISO[ISO XML gen]
   Worker --> Bundle[Create & sign bundle]
-  Bundle -->|bundle_hash| AnchorSvc[Anchor (web3) / anchor_node]
+  Bundle -->|bundle_hash| AnchorSvc["Anchor (web3) / anchor_node"]
   AnchorSvc -->|tx -> RPC| Flare[Flare Network]
   Flare -->|event| AnchorSvc
   AnchorSvc --> DB
